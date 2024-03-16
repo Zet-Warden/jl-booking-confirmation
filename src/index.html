@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Booking Confirmation</title>
+        <script src="./htmltoimage.js"></script>
+        <script src="./day.js"></script>
+        <script defer src="./index.js"></script>
+        <link href="./output.css" rel="stylesheet" />
+        <link rel="stylesheet" media="print" href="print.css" />
+    </head>
+    <body class="m-5">
+        <div class="print:hidden flex justify-center">
+            <div
+                class="w-full md:w-auto flex flex-col items-start gap-6 md:items-start md:flex-row"
+            >
+                <div class="flex flex-col gap-2 md:border-r border-black pr-2">
+                    <div class="flex items-center">
+                        <span class="w-40">Guest Name</span>
+                        <input
+                            id="ip_guest_name"
+                            type="text"
+                            class="border w-40 px-2 py-1"
+                        />
+                    </div>
+                    <div class="flex">
+                        <p class="w-40">Number of adults</p>
+                        <input
+                            id="ip_num_adults"
+                            type="number"
+                            class="w-20 border pl-10"
+                            min="0"
+                            value="0"
+                        />
+                    </div>
+                    <div class="flex">
+                        <p class="w-40">Number of children</p>
+                        <input
+                            id="ip_num_children"
+                            type="number"
+                            class="w-20 border pl-10"
+                            min="0"
+                            value="0"
+                        />
+                    </div>
+                    <div class="flex gap-14">
+                        <label
+                            >In:
+                            <input
+                                id="ip_check-in"
+                                type="date"
+                                class="border px-2 py-1"
+                        /></label>
+                        <label
+                            >Out:
+                            <input
+                                id="ip_check-out"
+                                type="date"
+                                class="border px-2 py-1"
+                        /></label>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col justify-start gap-2 md:border-r border-black pr-2"
+                >
+                    <div class="flex flex-wrap gap-1 md:gap-5">
+                        <div class="flex items-center">
+                            <p class="w-40">Room Type</p>
+                            <select
+                                id="ip_room_type"
+                                class="border w-32 bg-white px-2 py-1"
+                            >
+                                <option value="Studio">Studio</option>
+                                <option value="Twin">Twin</option>
+                                <option value="Two Bedroom">Two Bedroom</option>
+                                <option value="Triple">Triple</option>
+                                <option value="Family">Family</option>
+                                <option value="Connecting">
+                                    Connecting Room
+                                </option>
+                                <option value="Suite">Jaelle Suite</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center">
+                            <p class="w-40 md:w-32">Amount</p>
+                            <input
+                                id="ip_room_price"
+                                type="text"
+                                class="border w-28 px-2 py-1"
+                            />
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 md:gap-5 items-center">
+                        <div class="flex">
+                            <p class="w-40"># of Rooms:</p>
+                            <input
+                                id="ip_num_rooms"
+                                type="number"
+                                class="w-20 border pl-10"
+                                min="0"
+                                value="1"
+                            />
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 md:gap-5 items-center">
+                        <div class="flex pr-5 md:pr-12">
+                            <p class="w-40">Extra Person Nbr:</p>
+                            <input
+                                id="ip_extra_adult"
+                                type="number"
+                                class="w-20 border pl-10"
+                                min="0"
+                                value="0"
+                            />
+                        </div>
+                        <div class="flex">
+                            <p class="w-40 md:w-32">Extra Child Nbr:</p>
+                            <input
+                                id="ip_extra_child"
+                                type="number"
+                                class="w-20 border pl-10"
+                                min="0"
+                                value="0"
+                            />
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 md:gap-5 items-center">
+                        <div class="flex pr-5 md:pr-12">
+                            <p class="w-40"># of Pets</p>
+                            <input
+                                id="ip_num_pets"
+                                type="number"
+                                class="w-20 border pl-10"
+                                min="0"
+                                value="0"
+                            />
+                        </div>
+                        <div class="flex">
+                            <p class="w-40 md:w-32">Extra Bed Nbr:</p>
+                            <input
+                                id="ip_extra_bed"
+                                type="number"
+                                class="w-20 border pl-10"
+                                min="0"
+                                value="0"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="w-full md:w-auto md:h-full flex flex-col justify-start gap-2"
+                >
+                    <div class="flex">
+                        <p class="w-40">Mode of Payment</p>
+                        <select
+                            id="ip_mode_of_payment"
+                            class="border md:w-[calc(100%-10rem)] bg-white px-2 py-1"
+                        >
+                            <option value="gcash">GCash</option>
+                            <option value="credit_card">
+                                Online Credit Card
+                            </option>
+                            <option value="cash">Cash</option>
+                        </select>
+                    </div>
+                    <div class="flex">
+                        <span class="w-40">Reference Number</span>
+                        <input
+                            id="ip_payment_reference"
+                            type="text"
+                            class="border"
+                        />
+                    </div>
+                    <div class="flex">
+                        <p class="w-40">Downpayment</p>
+                        <input id="ip_downpayment" type="text" class="border" />
+                    </div>
+                    <div class="flex">
+                        <p class="w-40">Booking Id</p>
+                        <input
+                            id="ip_booking_id"
+                            type="text"
+                            class="border"
+                            disabled
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print:hidden flex justify-center m-5">
+            <button
+                id="generate_btn"
+                class="ml-3 border px-5 py-3 hover:brightness-90 bg-white uppercase font-bold text-xl"
+            >
+                Generate
+            </button>
+            <button
+                id="copy_btn"
+                class="ml-3 border px-5 py-3 hover:brightness-90 bg-white uppercase font-bold text-xl"
+            >
+                Copy
+            </button>
+        </div>
+        <div class="flex justify-center">
+            <div
+                id="reservation_receipt"
+                class="bg-white px-16 py-12 print:px-0 print:py-0"
+                style="width: 22cm"
+            >
+                <div class="header leading-6">
+                    <p>Jaelle Residences</p>
+                    <p>MH Del Pilar cor. Profugo Street</p>
+                    <p>Barangay V, Lucena City, Quezon</p>
+                    <br />
+                    <div>
+                        <span class="inline-block w-28">Booking Id:</span>
+                        <span id="booking_id"></span>
+                    </div>
+                    <div>
+                        <span class="inline-block w-28">Payment Date:</span>
+                        <span id="payment_date"></span>
+                    </div>
+                </div>
+                <p class="text-center text-lg font-bold">
+                    Booking Confirmation
+                </p>
+                <div class="m-auto customer_details mt-5">
+                    <div
+                        class="text-center border border-black py-1 font-bold bg-yellow-100"
+                    >
+                        <h2>Customer Details</h2>
+                    </div>
+                    <div
+                        class="px-3 py-1 border border-black border-t-0 leading-5"
+                    >
+                        <div>
+                            <span class="inline-block w-40">Name:</span>
+                            <span id="guest_name"></span>
+                        </div>
+                        <div>
+                            <span class="inline-block w-40"
+                                >Number of persons:</span
+                            >
+                            <span id="num_persons"></span>
+                        </div>
+                        <div>
+                            <span class="inline-block w-40"
+                                >Mode of reservation:</span
+                            >
+                            <span id="mode_of_reservation">GCash</span>
+                        </div>
+                        <div>
+                            <span class="inline-block w-40"
+                                >Reference Number:</span
+                            >
+                            <span id="payment_reference"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description and Amount Table -->
+                <div class="m-auto">
+                    <div class="mt-3 border border-black text-center">
+                        <div class="flex px-3">
+                            <div class="w-2/3 border-r border-black py-1">
+                                Description
+                            </div>
+                            <div class="flex-1 py-1">Amount</div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="flex px-3 border-x border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Room Type</p>
+                                    <p id="room_type" class="capitalize">
+                                        Studio
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">
+                                PHP <span id="room_price">2000.00</span> / night
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="flex px-3 border-x border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40"># of Rooms</p>
+                                </div>
+                            </div>
+                            <div id="num_rooms" class="flex-1 text-right py-1">
+                                1
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="flex px-3 border-x border-b border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Period</p>
+                                    <p id="period"></p>
+                                </div>
+                            </div>
+                            <div
+                                id="num_nights"
+                                class="flex-1 text-right py-1"
+                            ></div>
+                        </div>
+                    </div>
+                    <!-- Extra Person -->
+                    <div class="">
+                        <div class="flex px-3 border-x border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Extra Person Charge</p>
+                                    <p id="extra_person"></p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">
+                                PHP <span id="extra_person_charge">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Extra Bed -->
+                    <div class="">
+                        <div class="flex px-3 border-x border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Extra Bed Charge</p>
+                                    <p id="extra_bed"></p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">
+                                PHP <span id="extra_bed_charge">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pet Fee -->
+                    <div class="">
+                        <div class="flex px-3 border-x border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Pet Fee</p>
+                                    <p id="num_pets"></p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">
+                                PHP <span id="pet_charge">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Room Charge -->
+                    <div class="">
+                        <div class="flex px-3 border-x border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Total Room Charges</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">
+                                PHP <span id="total_room_charge">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Discount -->
+                    <!-- <div class="">
+                        <div class="flex px-3 border-x border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Discount</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">
+                                PHP <span id="discount">0.00</span>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Downpayment -->
+                    <div class="">
+                        <div class="flex px-3 border-x border-b border-black">
+                            <div class="w-2/3 border-r border-black py-1">
+                                <div class="flex">
+                                    <p class="w-40">Downpayment</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">
+                                PHP <span id="downpayment">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="">
+                        <div class="flex px-3 border-x border-b border-black">
+                            <div class="w-2/3 border-r border-black py-2 pr-3">
+                                <div class="flex justify-end">
+                                    <p class="w-40 text-right">GRAND TOTAL</p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1">P3000</div>
+                        </div>
+                    </div> -->
+                    <div class="">
+                        <div class="flex px-3 border-x border-b border-black">
+                            <div class="w-2/3 border-r border-black py-2 pr-3">
+                                <div class="flex justify-end">
+                                    <p class="w-40 text-right font-bold">
+                                        Total Balance
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-right py-1 font-bold">
+                                PHP <span id="total_balance">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <p class="font-bold">Remarks:</p>
+                    <p>
+                        You will pay PHP
+                        <span id="payment_remarks" class="font-bold">0.00</span>
+                        at the property on your check-in date of
+                        <span id="check-in_remarks">Wednesday, March 14</span>.
+                    </p>
+                </div>
+
+                <div class="mt-10">
+                    <p class="text-red-600 font-bold">NOTE:</p>
+                    <ul class="list-disc pl-10">
+                        <li>
+                            Check-in time is 2pm onwards. Check-out time is 12
+                            noon. Early check-in and late check-out fees are
+                            applicable for arrival outside the designated
+                            check-in and check-out time.
+                        </li>
+                        <li>
+                            Visitors are only allowed a maximum of 3 hours
+                            inside the room. For longer visits, please entertain
+                            visitors at the Roof Deck (6th Floor) that is open
+                            until 10 pm.
+                        </li>
+                        <li>
+                            All payments made are non-refundable. Re-booking is
+                            allowed with at least 2 days prior notice.
+                        </li>
+                        <li>
+                            Any cancellation received within 5 days prior to the
+                            arrival date will be charged for the entire stay.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
