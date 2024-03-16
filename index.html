@@ -213,7 +213,7 @@
                     min-height: 24cm;
                 "
             >
-                <div class="header leading-6">
+                <div class="header leading-5">
                     <p>Jaelle Residences</p>
                     <p>MH Del Pilar cor. Profugo Street</p>
                     <p>Barangay V, Lucena City, Quezon</p>
@@ -227,17 +227,17 @@
                         <span id="payment_date"></span>
                     </div>
                 </div>
-                <p class="text-center text-lg font-bold">
+                <p class="text-center text-lg font-bold my-2">
                     Booking Confirmation
                 </p>
-                <div class="m-auto customer_details mt-5">
+                <div class="m-auto customer_details">
                     <div
                         class="text-center border border-black py-1 font-bold bg-yellow-100"
                     >
-                        <h2>Customer Details</h2>
+                        <h2>Reservation Details</h2>
                     </div>
                     <div
-                        class="px-3 py-1 border border-black border-t-0 leading-5"
+                        class="px-3 py-1 border border-black border-t-0 leading-6"
                     >
                         <div>
                             <span class="inline-block w-40">Name:</span>
@@ -277,7 +277,7 @@
 
                     <div class="">
                         <div class="flex px-3 border-x border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black pt-1">
                                 <div class="flex">
                                     <p class="w-40">Room Type</p>
                                     <p id="room_type" class="capitalize">
@@ -285,26 +285,26 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex-1 text-right py-1">
+                            <div class="flex-1 text-right pt-1">
                                 PHP <span id="room_price">2000.00</span> / night
                             </div>
                         </div>
                     </div>
                     <div class="">
                         <div class="flex px-3 border-x border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black">
                                 <div class="flex">
                                     <p class="w-40"># of Rooms</p>
                                 </div>
                             </div>
-                            <div id="num_rooms" class="flex-1 text-right py-1">
+                            <div id="num_rooms" class="flex-1 text-right">
                                 1
                             </div>
                         </div>
                     </div>
                     <div class="">
                         <div class="flex px-3 border-x border-b border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black pb-1">
                                 <div class="flex">
                                     <p class="w-40">Period</p>
                                     <p id="period"></p>
@@ -312,20 +312,20 @@
                             </div>
                             <div
                                 id="num_nights"
-                                class="flex-1 text-right py-1"
+                                class="flex-1 text-right pb-1"
                             ></div>
                         </div>
                     </div>
                     <!-- Extra Person -->
                     <div class="">
                         <div class="flex px-3 border-x border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black pt-1">
                                 <div class="flex">
                                     <p class="w-40">Extra Person Charge</p>
                                     <p id="extra_person"></p>
                                 </div>
                             </div>
-                            <div class="flex-1 text-right py-1">
+                            <div class="flex-1 text-right pt-1">
                                 PHP <span id="extra_person_charge">0.00</span>
                             </div>
                         </div>
@@ -333,13 +333,13 @@
                     <!-- Extra Bed -->
                     <div class="">
                         <div class="flex px-3 border-x border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black">
                                 <div class="flex">
                                     <p class="w-40">Extra Bed Charge</p>
                                     <p id="extra_bed"></p>
                                 </div>
                             </div>
-                            <div class="flex-1 text-right py-1">
+                            <div class="flex-1 text-right">
                                 PHP <span id="extra_bed_charge">0.00</span>
                             </div>
                         </div>
@@ -347,13 +347,13 @@
                     <!-- Pet Fee -->
                     <div class="">
                         <div class="flex px-3 border-x border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black">
                                 <div class="flex">
                                     <p class="w-40">Pet Fee</p>
                                     <p id="num_pets"></p>
                                 </div>
                             </div>
-                            <div class="flex-1 text-right py-1">
+                            <div class="flex-1 text-right">
                                 PHP <span id="pet_charge">0.00</span>
                             </div>
                         </div>
@@ -361,12 +361,12 @@
                     <!-- Total Room Charge -->
                     <div class="">
                         <div class="flex px-3 border-x border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black">
                                 <div class="flex">
                                     <p class="w-40">Total Room Charges</p>
                                 </div>
                             </div>
-                            <div class="flex-1 text-right py-1">
+                            <div class="flex-1 text-right">
                                 PHP <span id="total_room_charge">0.00</span>
                             </div>
                         </div>
@@ -387,12 +387,12 @@
                     <!-- Downpayment -->
                     <div class="">
                         <div class="flex px-3 border-x border-b border-black">
-                            <div class="w-2/3 border-r border-black py-1">
+                            <div class="w-2/3 border-r border-black pt-3 pb-1">
                                 <div class="flex">
                                     <p class="w-40">Downpayment</p>
                                 </div>
                             </div>
-                            <div class="flex-1 text-right py-1">
+                            <div class="flex-1 text-right pt-3 pb-1">
                                 PHP <span id="downpayment">0.00</span>
                             </div>
                         </div>
@@ -426,10 +426,10 @@
                 <div class="mt-5">
                     <p class="font-bold">Remarks:</p>
                     <p>
-                        You will pay PHP
+                        You will pay <span class="font-bold">PHP</span>
                         <span id="payment_remarks" class="font-bold">0.00</span>
                         at the property on your check-in date of
-                        <span id="check-in_remarks">Wednesday, March 14</span>.
+                        <span id="check-in_remarks"></span>.
                     </p>
                 </div>
 
@@ -437,8 +437,18 @@
                     <p class="text-red-600 font-bold">NOTE:</p>
                     <ul class="list-disc pl-10">
                         <li>
-                            Check-in time is 2pm onwards. Check-out time is 12
-                            noon. Early check-in and late check-out fees are
+                            <span class="text-red-600 font-bold"
+                                >IMPORTANT!</span
+                            >
+                            At check-in, you must present a legible copy of your
+                            booking confirmation receipt.
+                        </li>
+                        <li>
+                            Check-in time is 2 pm onwards. Check-out time is 12
+                            noon.
+                        </li>
+                        <li>
+                            Early check-in and late check-out fees are
                             applicable for arrival outside the designated
                             check-in and check-out time.
                         </li>
@@ -448,9 +458,15 @@
                             visitors at the Roof Deck (6th Floor) that is open
                             until 10 pm.
                         </li>
-                        <li>
+                        <!-- <li>
                             All payments made are non-refundable. Re-booking is
                             allowed with at least 2 days prior notice.
+                        </li> -->
+                        <li>
+                            Any cancellations received within 5 days prior to
+                            arrival date will be charged for the entire stay.
+                            Re-booking is allowed with at least 3 days prior
+                            notice.
                         </li>
                     </ul>
                 </div>

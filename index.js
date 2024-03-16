@@ -79,6 +79,13 @@ function getRoomPrice(roomType) {
     }
 }
 
+function formatCurrency(num) {
+    return num.toLocaleString('en', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+}
+
 function copyNodeImageToClipboard(node) {
     htmlToImage
         .toBlob(node)
@@ -208,7 +215,8 @@ generateButton.addEventListener('click', () => {
         : booking.numNights + ' night/s';
 
     elRoomType.textContent = ipRoomType.value;
-    elRoomPrice.textContent = Number(ipRoomPrice.value).toFixed(2);
+    elRoomPrice.textContent = formatCurrency(Number(ipRoomPrice.value));
+
     elNumRooms.textContent = ipNumRooms.value;
 
     const extraPersonCharge =
@@ -218,15 +226,15 @@ generateButton.addEventListener('click', () => {
     elExtraPerson.textContent = `${
         booking.extraAdult > 0 ? `${booking.extraAdult} adult` : ''
     } ${booking.extraChild > 0 ? `${booking.extraChild} child` : ''}`;
-    elExtraPersonCharge.textContent = extraPersonCharge.toFixed(2);
+    elExtraPersonCharge.textContent = formatCurrency(extraPersonCharge);
 
     const extraBedCharge = booking.extraBed * EXTRA_BED_FEE * booking.numNights;
     elExtraBed.textContent = booking.extraBed > 0 ? booking.extraBed : '';
-    elExtraBedCharge.textContent = extraBedCharge.toFixed(2);
+    elExtraBedCharge.textContent = formatCurrency(extraBedCharge);
 
     const petCharge = PET_FEE * booking.numPets * booking.numNights;
     elNumPets.textContent = `${booking.numPets > 0 ? booking.numPets : ''}`;
-    elPetCharge.textContent = petCharge.toFixed(2);
+    elPetCharge.textContent = formatCurrency(petCharge);
 
     // calculate total room charge
     const roomCharge = booking.roomPrice * booking.numNights;
@@ -235,13 +243,12 @@ generateButton.addEventListener('click', () => {
         extraPersonCharge +
         extraBedCharge +
         petCharge;
-    elTotalRoomCharge.textContent = totalRoomCharge.toFixed(2);
-
-    elDownpayment.textContent = booking.downpayment.toFixed(2);
+    elTotalRoomCharge.textContent = formatCurrency(totalRoomCharge);
+    elDownpayment.textContent = formatCurrency(booking.downpayment);
 
     const totalBalance = totalRoomCharge - booking.downpayment;
-    elTotalBalance.textContent = totalBalance.toFixed(2);
-    elPaymentRemarks.textContent = totalBalance.toFixed(2);
+    elTotalBalance.textContent = formatCurrency(totalBalance);
+    elPaymentRemarks.textContent = formatCurrency(totalBalance);
     elCheckinRemarks.textContent = booking.checkInDate.format(
         'dddd, MMMM DD, YYYY'
     );
