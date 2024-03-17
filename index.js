@@ -15,16 +15,16 @@ const booking = {
     guestName: '',
     numAdults: 0,
     numChildren: 0,
-    checkInDate: new Date(), //today
-    checkOutDate: new Date().setDate(new Date().getDate() + 1), //tomorrow
+    checkInDate: dayjs(), //today
+    checkOutDate: dayjs().add(1, 'day'), //tomorrow
 
     roomType: null,
     roomPrice: null,
     numRooms: 0,
-    extraAdult: null,
-    extraChild: null,
-    extraBed: null,
-    numPets: null,
+    extraAdult: 0,
+    extraChild: 0,
+    extraBed: 0,
+    numPets: 0,
 
     modeOfPayment: null,
     paymentReferenceNumber: null,
@@ -32,6 +32,7 @@ const booking = {
     bookingId: null,
 
     numNights: 0,
+    totalBalance: 0,
 };
 
 // helper functions
@@ -87,6 +88,18 @@ function formatCurrency(num) {
 }
 
 function copyNodeImageToClipboard(node) {
+    const bookingInfo = `${booking.guestName}\t${
+        booking.bookingId
+    }\t${booking.checkInDate.format(
+        'MMMM DD YYYY'
+    )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.roomType}\t${
+        booking.numAdults + booking.extraAdult
+    }\t${booking.numChildren + booking.extraChild}\t\t${
+        booking.totalBalance - booking.downpayment
+    }\t${booking.totalBalance}\t0\t${booking.totalBalance}`;
+
+    navigator.clipboard.writeText(bookingInfo);
+
     htmlToImage
         .toBlob(node)
         .then(function (blob) {
@@ -153,6 +166,9 @@ const elTotalBalance = document.querySelector('#total_balance');
 
 const elPaymentRemarks = document.querySelector('#payment_remarks');
 const elCheckinRemarks = document.querySelector('#check-in_remarks');
+
+const elBookingInfo = document.querySelector('#booking_info');
+
 // default values
 window.onload = () => {
     ipCheckIn.value = dayjs().format('YYYY-MM-DD');
@@ -173,22 +189,22 @@ const generateButton = document.querySelector('#generate_btn');
 generateButton.addEventListener('click', () => {
     // get booking values
     booking.guestName = ipGuestName.value;
-    booking.numAdults = ipNumberOfAdults.value;
-    booking.numChildren = ipNumberOfChildren.value;
+    booking.numAdults = +ipNumberOfAdults.value;
+    booking.numChildren = +ipNumberOfChildren.value;
     booking.checkInDate = dayjs(ipCheckIn.value);
     booking.checkOutDate = dayjs(ipCheckOut.value);
 
     booking.roomType = ipRoomType.value;
-    booking.roomPrice = ipRoomPrice.value;
-    booking.numRooms = ipNumRooms.value;
-    booking.extraAdult = ipExtraAdult.value;
-    booking.extraChild = ipExtraChild.value;
-    booking.extraBed = ipExtraBed.value;
-    booking.numPets = ipNumberofPets.value;
+    booking.roomPrice = +ipRoomPrice.value;
+    booking.numRooms = +ipNumRooms.value;
+    booking.extraAdult = +ipExtraAdult.value;
+    booking.extraChild = +ipExtraChild.value;
+    booking.extraBed = +ipExtraBed.value;
+    booking.numPets = +ipNumberofPets.value;
 
     booking.modeOfPayment = ipModeOfPayment.value;
     booking.paymentReferenceNumber = ipPaymentReferenceNumber.value;
-    booking.downpayment = Number(ipDownpayment.value);
+    booking.downpayment = +ipDownpayment.value;
     ipBookingId.value = generateBookingId(booking.modeOfPayment);
     booking.bookingId = ipBookingId.value;
 
@@ -215,7 +231,7 @@ generateButton.addEventListener('click', () => {
         : booking.numNights + ' night/s';
 
     elRoomType.textContent = ipRoomType.value;
-    elRoomPrice.textContent = formatCurrency(Number(ipRoomPrice.value));
+    elRoomPrice.textContent = formatCurrency(booking.roomPrice);
 
     elNumRooms.textContent = ipNumRooms.value;
 
@@ -247,11 +263,22 @@ generateButton.addEventListener('click', () => {
     elDownpayment.textContent = formatCurrency(booking.downpayment);
 
     const totalBalance = totalRoomCharge - booking.downpayment;
+    booking.totalBalance = totalBalance;
     elTotalBalance.textContent = formatCurrency(totalBalance);
     elPaymentRemarks.textContent = formatCurrency(totalBalance);
     elCheckinRemarks.textContent = booking.checkInDate.format(
         'dddd, MMMM DD, YYYY'
     );
+
+    elBookingInfo.textContent = `${booking.guestName}\t${
+        booking.bookingId
+    }\t${booking.checkInDate.format(
+        'MMMM DD YYYY'
+    )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.roomType}\t${
+        booking.numAdults + booking.extraAdult
+    }\t${booking.numChildren + booking.extraChild}\t\t${
+        booking.totalBalance - booking.downpayment
+    }\t${booking.totalBalance}\t0\t${booking.totalBalance}`;
 });
 
 // copy booking receipt image to clipboard
