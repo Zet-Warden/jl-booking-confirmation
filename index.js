@@ -88,6 +88,19 @@ function formatCurrency(num) {
 }
 
 function copyNodeImageToClipboard(node) {
+    htmlToImage
+        .toBlob(node)
+        .then(function (blob) {
+            const item = new ClipboardItem({ 'image/png': blob });
+            navigator.clipboard.write([item]);
+            alert('Successfully copied to clipboard!');
+        })
+        .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+        });
+}
+
+function copyBookingInfoToClipboard() {
     const bookingInfo = `${booking.guestName}\t${
         booking.bookingId
     }\t${booking.checkInDate.format(
@@ -99,17 +112,7 @@ function copyNodeImageToClipboard(node) {
     }\t${booking.totalBalance}\t0\t${booking.totalBalance}`;
 
     navigator.clipboard.writeText(bookingInfo);
-
-    htmlToImage
-        .toBlob(node)
-        .then(function (blob) {
-            const item = new ClipboardItem({ 'image/png': blob });
-            navigator.clipboard.write([item]);
-            alert('Successfully copied to clipboard!');
-        })
-        .catch(function (error) {
-            console.error('oops, something went wrong!', error);
-        });
+    alert('Successfully copied to clipboard!');
 }
 
 // DOM Nodes that hold input data
@@ -279,6 +282,9 @@ generateButton.addEventListener('click', () => {
     }\t${booking.numChildren + booking.extraChild}\t\t${
         booking.totalBalance - booking.downpayment
     }\t${booking.totalBalance}\t0\t${booking.totalBalance}`;
+
+    // change document title
+    document.title = `[Jaelle Residences] ${booking.bookingId} - ${booking.guestName}`;
 });
 
 // copy booking receipt image to clipboard
@@ -286,3 +292,8 @@ const copyButton = document.querySelector('#copy_btn');
 copyButton.addEventListener('click', () => {
     copyNodeImageToClipboard(elReservationReceipt);
 });
+
+const copyInfoButton = document.querySelector('#copy_info_btn');
+copyInfoButton.onclick = () => {
+    copyBookingInfoToClipboard();
+};
