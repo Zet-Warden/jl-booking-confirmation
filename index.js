@@ -294,11 +294,11 @@ copyButton.addEventListener('click', () => {
 });
 
 const copyInfoButton = document.querySelector('#copy_info_btn');
-copyInfoButton.onclick = () => {
+copyInfoButton.addEventListener('click', () => {
     copyBookingInfoToClipboard();
-};
+});
 
 const printButton = document.querySelector('#print_btn');
-printButton.onclick = () => {
+printButton.addEventListener('click', () => {
     window.print();
-};
+});
