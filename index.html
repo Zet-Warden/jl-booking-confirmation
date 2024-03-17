@@ -205,11 +205,20 @@
             >
                 Copy Info
             </button>
+            <button
+                id="print_btn"
+                class="ml-3 border px-5 py-3 hover:brightness-90 bg-white uppercase font-bold text-xl"
+            >
+                Print
+            </button>
         </div>
 
         <!-- Copy Past to Sheets -->
         <div class="print:hidden">
-            <pre id="booking_info" class="text-center w-auto"></pre>
+            <pre
+                id="booking_info"
+                class="print:hidden text-center w-auto"
+            ></pre>
         </div>
 
         <!-- Booking Confirmation -->

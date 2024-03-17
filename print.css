@@ -2,8 +2,4 @@
     body {
         print-color-adjust: exact;
     }
-
-    .noprint {
-        display: none;
-    }
 }
