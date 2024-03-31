@@ -4,6 +4,7 @@ const EXTRA_BED_FEE = 500;
 const PET_FEE = 400;
 
 const STUDIO_PRICE = 2000;
+const DELUXE_PRICE = 2400;
 const TWIN_PRICE = 3000;
 const TWO_BEDROOM_PRICE = 3000;
 const TRIPLE_PRICE = 3000;
@@ -32,6 +33,7 @@ const booking = {
     bookingId: null,
 
     numNights: 0,
+    totalRoomCharge: 0,
     totalBalance: 0,
 };
 
@@ -39,12 +41,14 @@ const booking = {
 function generateBookingId(modeOfPayment) {
     const getPrefix = () => {
         switch (modeOfPayment) {
-            case 'gcash':
+            case 'GCash':
                 return 'GC';
-            case 'credit_card':
+            case 'Credit Card':
                 return 'CC';
-            case 'cash':
+            case 'Cash':
                 return 'CA';
+            case 'On Site':
+                return 'OS';
         }
     };
 
@@ -65,6 +69,8 @@ function getRoomPrice(roomType) {
     switch (roomType) {
         case 'Studio':
             return STUDIO_PRICE;
+        case 'Deluxe':
+            return DELUXE_PRICE;
         case 'Twin':
             return TWIN_PRICE;
         case 'Two Bedroom':
@@ -108,8 +114,8 @@ function copyBookingInfoToClipboard() {
     )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.roomType}\t${
         booking.numAdults + booking.extraAdult
     }\t${booking.numChildren + booking.extraChild}\t\t${
-        booking.totalBalance - booking.downpayment
-    }\t${booking.totalBalance}\t0\t${booking.totalBalance}`;
+        booking.totalBalance
+    }\t${booking.totalRoomCharge}\t0\t${booking.totalRoomCharge}`;
 
     navigator.clipboard.writeText(bookingInfo);
     alert('Successfully copied to clipboard!');
@@ -224,6 +230,7 @@ generateButton.addEventListener('click', () => {
     elNumberOfPersons.textContent = `${booking.numAdults} adult ${
         booking.numChildren > 0 ? `${booking.numChildren} child` : ''
     }`;
+    elModeOfPayment.textContent = booking.modeOfPayment;
     elPaymentReference.textContent = booking.paymentReferenceNumber;
 
     elPeriod.textContent = `${booking.checkInDate.format(
@@ -264,6 +271,7 @@ generateButton.addEventListener('click', () => {
         petCharge;
     elTotalRoomCharge.textContent = formatCurrency(totalRoomCharge);
     elDownpayment.textContent = formatCurrency(booking.downpayment);
+    booking.totalRoomCharge = totalRoomCharge;
 
     const totalBalance = totalRoomCharge - booking.downpayment;
     booking.totalBalance = totalBalance;
@@ -280,8 +288,8 @@ generateButton.addEventListener('click', () => {
     )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.roomType}\t${
         booking.numAdults + booking.extraAdult
     }\t${booking.numChildren + booking.extraChild}\t\t${
-        booking.totalBalance - booking.downpayment
-    }\t${booking.totalBalance}\t0\t${booking.totalBalance}`;
+        booking.totalBalance
+    }\t${booking.totalRoomCharge}\t0\t${booking.totalRoomCharge}`;
 
     // change document title
     document.title = `[Jaelle Residences] ${booking.bookingId} - ${booking.guestName}`;

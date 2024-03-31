@@ -72,6 +72,7 @@
                                 class="border w-32 bg-white px-2 py-1"
                             >
                                 <option value="Studio">Studio</option>
+                                <option value="Deluxe">Deluxe</option>
                                 <option value="Twin">Twin</option>
                                 <option value="Two Bedroom">Two Bedroom</option>
                                 <option value="Triple">Triple</option>
@@ -157,9 +158,10 @@
                             id="ip_mode_of_payment"
                             class="border md:w-[calc(100%-10rem)] bg-white px-2 py-1"
                         >
-                            <option value="gcash">GCash</option>
-                            <option value="credit_card">Credit Card</option>
-                            <option value="cash">Cash</option>
+                            <option value="GCash">GCash</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Cash">Cash</option>
+                            <option value="On Site">On Site</option>
                         </select>
                     </div>
                     <div class="flex">
@@ -228,7 +230,7 @@
                 class="bg-white px-16 py-12"
                 style="
                     width: 18cm;
-                    height: 24cm;
+                    height: 25cm;
                     min-width: 18cm;
                     min-height: 24cm;
                 "
@@ -239,11 +241,11 @@
                     <p>Barangay V, Lucena City, Quezon</p>
                     <br />
                     <div>
-                        <span class="inline-block w-28">Booking Id:</span>
+                        <span class="inline-block w-28">Booking ID:</span>
                         <span id="booking_id"></span>
                     </div>
                     <div>
-                        <span class="inline-block w-28">Payment Date:</span>
+                        <span class="inline-block w-28">Issued Date:</span>
                         <span id="payment_date"></span>
                     </div>
                 </div>
@@ -271,9 +273,9 @@
                         </div>
                         <div>
                             <span class="inline-block w-40"
-                                >Mode of reservation:</span
+                                >Mode of payment:</span
                             >
-                            <span id="mode_of_reservation">GCash</span>
+                            <span id="mode_of_payment">GCash</span>
                         </div>
                         <div>
                             <span class="inline-block w-40"
@@ -436,8 +438,10 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex-1 text-right py-1 font-bold">
-                                PHP <span id="total_balance">0.00</span>
+                            <div
+                                class="flex items-center justify-end flex-1 text-right py-1 font-bold"
+                            >
+                                PHP&nbsp;<span id="total_balance">0.00</span>
                             </div>
                         </div>
                     </div>
@@ -446,8 +450,8 @@
                 <div class="mt-5">
                     <p class="font-bold">Remarks:</p>
                     <p>
-                        You will pay <span class="font-bold">PHP</span>
-                        <span id="payment_remarks" class="font-bold">0.00</span>
+                        Kindly pay <span class="font-bold">PHP</span>
+                        <span id="payment_remarks" class="font-bold"></span>
                         at the property on your check-in date of
                         <span id="check-in_remarks"></span>.
                     </p>
