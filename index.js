@@ -111,11 +111,13 @@ function copyBookingInfoToClipboard() {
         booking.bookingId
     }\t${booking.checkInDate.format(
         'MMMM DD YYYY'
-    )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.roomType}\t${
-        booking.numAdults + booking.extraAdult
-    }\t${booking.numChildren + booking.extraChild}\t\t${
-        booking.totalBalance
-    }\t${booking.totalRoomCharge}\t0\t${booking.totalRoomCharge}`;
+    )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.numRooms}x ${
+        booking.roomType
+    }\t${booking.numAdults + booking.extraAdult}\t${
+        booking.numChildren + booking.extraChild
+    }\t\t${booking.totalBalance}\t${booking.totalRoomCharge}\t0\t${
+        booking.totalRoomCharge
+    }`;
 
     navigator.clipboard.writeText(bookingInfo);
     alert('Successfully copied to clipboard!');
