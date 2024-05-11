@@ -287,11 +287,13 @@ generateButton.addEventListener('click', () => {
         booking.bookingId
     }\t${booking.checkInDate.format(
         'MMMM DD YYYY'
-    )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.roomType}\t${
-        booking.numAdults + booking.extraAdult
-    }\t${booking.numChildren + booking.extraChild}\t\t${
-        booking.totalBalance
-    }\t${booking.totalRoomCharge}\t0\t${booking.totalRoomCharge}`;
+    )}\t${booking.checkOutDate.format('MMMM DD YYYY')}\t${booking.numRooms}x ${
+        booking.roomType
+    }\t${booking.numAdults + booking.extraAdult}\t${
+        booking.numChildren + booking.extraChild
+    }\t\t${booking.totalBalance}\t${booking.totalRoomCharge}\t0\t${
+        booking.totalRoomCharge
+    }`;
 
     // change document title
     document.title = `[Jaelle Residences] ${booking.bookingId} - ${booking.guestName}`;
