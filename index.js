@@ -8,8 +8,8 @@ const DELUXE_PRICE = 2400;
 const TWIN_PRICE = 3000;
 const TWO_BEDROOM_PRICE = 3000;
 const TRIPLE_PRICE = 3000;
-const FAMILY_PRICE = 3800;
-const CONNECTING_PRICE = 4300;
+const FAMILY_PRICE = 4000;
+const CONNECTING_PRICE = 4500;
 const SUITE_PRICE = 3500;
 
 const booking = {
@@ -19,6 +19,7 @@ const booking = {
     checkInDate: dayjs(), //today
     checkOutDate: dayjs().add(1, "day"), //tomorrow
 
+    rooms: [],
     roomType: null,
     roomPrice: null,
     numRooms: 0,
@@ -36,7 +37,11 @@ const booking = {
     discountDescription: "",
     discount: 0,
     totalRoomCharge: 0,
-    totalBalance: 0,
+    elTotalBalance: 0,
+    remainingBalance: 0,
+
+    // info to be pasted in google sheets
+    bookingInfo: "",
 };
 
 // helper functions
@@ -81,6 +86,12 @@ function formatCurrency(num) {
     });
 }
 
+function formatOccupancy(numAdults, numChildren) {
+    const adultStr = `${numAdults} adult`;
+    const childrenStr = numChildren > 0 ? ` ${numChildren} child` : "";
+    return `${adultStr}${childrenStr}`;
+}
+
 function copyNodeImageToClipboard(node) {
     htmlToImage
         .toBlob(node)
@@ -95,19 +106,19 @@ function copyNodeImageToClipboard(node) {
 }
 
 function copyBookingInfoToClipboard() {
-    const bookingInfo = `${booking.guestName}\t${
-        booking.bookingId
-    }\t${booking.checkInDate.format(
-        "MMMM DD YYYY",
-    )}\t${booking.checkOutDate.format("MMMM DD YYYY")}\t${booking.numRooms}x ${
-        booking.roomType
-    }\t${booking.numAdults + booking.extraAdult}\t${
-        booking.numChildren + booking.extraChild
-    }\t\t${booking.totalBalance}\t${booking.totalRoomCharge}\t0\t${
-        booking.totalRoomCharge
-    }`;
+    // const bookingInfo = `${booking.guestName}\t${
+    //     booking.bookingId
+    // }\t${booking.checkInDate.format(
+    //     "MMMM DD YYYY",
+    // )}\t${booking.checkOutDate.format("MMMM DD YYYY")}\t${booking.numRooms}x ${
+    //     booking.roomType
+    // }\t${booking.numAdults + booking.extraAdult}\t${
+    //     booking.numChildren + booking.extraChild
+    // }\t\t${booking.remainingBalance}\t${booking.totalRoomCharge}\t0\t${
+    //     booking.totalRoomCharge
+    // }`;
 
-    navigator.clipboard.writeText(bookingInfo);
+    navigator.clipboard.writeText(booking.bookingInfo);
     alert("Successfully copied to clipboard!");
 }
 
@@ -152,7 +163,7 @@ const elPeriod = document.querySelector("#period");
 const elNumNights = document.querySelector("#num_nights");
 const elRoomType = document.querySelector("#room_type");
 const elRoomPrice = document.querySelector("#room_price");
-const elNumRooms = document.querySelector("#num_rooms");
+// const elNumRooms = document.querySelector("#num_rooms");
 
 const elExtraPerson = document.querySelector("#extra_person");
 const elExtraPersonCharge = document.querySelector("#extra_person_charge");
@@ -169,6 +180,7 @@ const elDiscountDescription = document.querySelector("#discount_description");
 const elDiscount = document.querySelector("#discount");
 const elDownpayment = document.querySelector("#downpayment");
 const elTotalBalance = document.querySelector("#total_balance");
+const elRemainingBalance = document.querySelector("#remaining_balance");
 
 const elPaymentRemarks = document.querySelector("#payment_remarks");
 const elAdditionalRemarks = document.querySelector("#addtnl_remarks");
@@ -191,13 +203,81 @@ ipRoomType.onchange = () => {
     ipRoomPrice.value = getRoomPrice(ipRoomType.value);
 };
 
+//add room
+const addRoomButton = document.querySelector("#add_room_btn");
+addRoomButton.addEventListener("click", () => {
+    const roomType = ipRoomType.value;
+    const roomPrice = +ipRoomPrice.value;
+    const numRooms = +ipNumRooms.value;
+
+    const numAdults = +ipNumberOfAdults.value;
+    const numChildren = +ipNumberOfChildren.value;
+
+    const roomId = String(Math.floor(Math.random() * 10 ** 5)).padStart(5, 0);
+
+    booking.rooms.push({
+        id: roomId,
+        roomType,
+        roomPrice,
+        numRooms,
+        numAdults,
+        numChildren,
+    });
+
+    const roomInfoContainer = document.querySelector("#rooms_info");
+    const roomHTML = document.createElement("div");
+    const roomInfo = document.createElement("span");
+    const closeButton = document.createElement("span");
+
+    roomInfo.appendChild(
+        document.createTextNode(
+            `${numRooms == 1 ? "" : numRooms + " "}${roomType}`,
+        ),
+    );
+    roomInfo.appendChild(document.createElement("br"));
+    roomInfo.appendChild(
+        document.createTextNode(
+            "(" + formatOccupancy(numAdults, numChildren) + ")",
+        ),
+    );
+
+    closeButton.appendChild(document.createTextNode("X"));
+    closeButton.setAttribute(
+        "class",
+        "cursor-pointer px-2 py-3 text-red-500 ml-4 font-bold absolute top-0 right-0",
+    );
+    closeButton.addEventListener("click", () => {
+        roomHTML.remove();
+        booking.rooms = booking.rooms.filter((room) => room.id != roomId);
+    });
+
+    roomHTML.setAttribute("id", roomId);
+    roomHTML.setAttribute("class", "border px-2 py-3 w-32 relative");
+
+    roomHTML.appendChild(roomInfo);
+    roomHTML.appendChild(closeButton);
+
+    roomInfoContainer.appendChild(roomHTML);
+
+    // reset input fields
+    ipNumberOfAdults.value = 1;
+    ipNumberOfChildren.value = 0;
+    ipNumberofPets.value = 0;
+});
+
 // generate booking confirmation receipt
 const generateButton = document.querySelector("#generate_btn");
 generateButton.addEventListener("click", () => {
-    // get booking values
+    // set booking values
     booking.guestName = ipGuestName.value;
-    booking.numAdults = +ipNumberOfAdults.value;
-    booking.numChildren = +ipNumberOfChildren.value;
+    booking.numAdults = booking.rooms.reduce(
+        (numAdults, room) => numAdults + room.numAdults,
+        0,
+    );
+    booking.numChildren = booking.rooms.reduce(
+        (numChildren, room) => numChildren + room.numChildren,
+        0,
+    );
     booking.checkInDate = dayjs(ipCheckIn.value);
     booking.checkOutDate = dayjs(ipCheckOut.value);
 
@@ -215,16 +295,17 @@ generateButton.addEventListener("click", () => {
     booking.discountDescription = ipDiscountDescription.value;
     booking.discount = +ipDiscount.value;
 
-    ipBookingId.value = generateBookingId(booking.modeOfPayment);
-    booking.bookingId = ipBookingId.value;
+    booking.bookingId = generateBookingId(booking.modeOfPayment);
+    ipBookingId.value = booking.bookingId;
 
     // take into account "nights" for day room
+    // day room is considered 1 night for room price computation
     booking.numNights = Math.max(
         booking.checkOutDate.diff(booking.checkInDate, "day"),
         1,
     );
 
-    // set booking values
+    // display booking values in HTML
     elBookingId.textContent = booking.bookingId;
     elPaymentDate.textContent = dayjs().format("MMMM DD, YYYY");
     elGuestName.textContent = booking.guestName;
@@ -241,51 +322,63 @@ generateButton.addEventListener("click", () => {
         ? "Day Room"
         : booking.numNights + " night/s";
 
-    elRoomType.textContent = ipRoomType.value;
-    elRoomPrice.textContent = formatCurrency(booking.roomPrice);
+    elRoomType.innerHTML = booking.rooms.reduce(
+        //add br line after the first element
+        (acc, curr, index) =>
+            `${acc} ${index ? "<br>" : ""} ${curr.roomType} (${formatOccupancy(curr.numAdults, curr.numChildren)})`,
+        "",
+    );
+    elRoomPrice.innerHTML = booking.rooms.reduce(
+        //add br line after the first element
+        (acc, curr, index) =>
+            `${acc} ${index ? "<br>" : ""} PHP ${formatCurrency(curr.roomPrice)} / night`,
+        "",
+    );
+    elExtraPerson.textContent = `${
+        booking.extraAdult > 0 ? `${booking.extraAdult} adult` : ""
+    } ${booking.extraChild > 0 ? `${booking.extraChild} child` : ""}`;
+    elExtraBed.textContent = booking.extraBed > 0 ? booking.extraBed : "";
+    elNumPets.textContent = `${booking.numPets > 0 ? booking.numPets + " Pet" : ""}`;
 
-    elNumRooms.textContent = ipNumRooms.value;
+    // elNumRooms.textContent = ipNumRooms.value;
 
     const extraPersonCharge =
         booking.numNights *
         (booking.extraAdult * EXTRA_PERSON_FEE +
             booking.extraChild * EXTRA_CHILD_FEE);
-    elExtraPerson.textContent = `${
-        booking.extraAdult > 0 ? `${booking.extraAdult} adult` : ""
-    } ${booking.extraChild > 0 ? `${booking.extraChild} child` : ""}`;
     elExtraPersonCharge.textContent = formatCurrency(extraPersonCharge);
 
     const extraBedCharge = booking.extraBed * EXTRA_BED_FEE * booking.numNights;
-    elExtraBed.textContent = booking.extraBed > 0 ? booking.extraBed : "";
     elExtraBedCharge.textContent = formatCurrency(extraBedCharge);
 
     const petCharge = PET_FEE * booking.numPets * booking.numNights;
-    elNumPets.textContent = `${booking.numPets > 0 ? booking.numPets : ""}`;
     elPetCharge.textContent = formatCurrency(petCharge);
 
-    // calculate total room charge
-    const roomCharge = booking.roomPrice * booking.numNights;
+    const roomCharge = booking.rooms.reduce(
+        // room charge for all rooms for the entire stay
+        (roomCharge, room) => roomCharge + room.roomPrice * booking.numNights,
+        0,
+    );
     const totalRoomCharge =
-        roomCharge * booking.numRooms +
-        extraPersonCharge +
-        extraBedCharge +
-        petCharge;
+        roomCharge + extraPersonCharge + extraBedCharge + petCharge;
+
+    const totalBalance = totalRoomCharge - booking.discount;
+    const remainingBalance = totalBalance - booking.downpayment;
+
+    booking.totalRoomCharge = totalRoomCharge;
+    booking.totalBalance = totalBalance;
+    booking.remainingBalance = remainingBalance;
+
     elTotalRoomCharge.textContent = formatCurrency(totalRoomCharge);
     elDownpayment.textContent = formatCurrency(booking.downpayment);
-    booking.totalRoomCharge = totalRoomCharge;
-
-    // get discount
+    elDiscount.textContent = formatCurrency(booking.discount);
     elDiscountDescription.textContent = booking.discountDescription
         ? `(${booking.discountDescription})`
         : "";
-    elDiscount.textContent = formatCurrency(booking.discount);
 
-    // get balance
-    const totalBalance =
-        totalRoomCharge - booking.downpayment - booking.discount;
-    booking.totalBalance = totalBalance;
     elTotalBalance.textContent = formatCurrency(totalBalance);
-    elPaymentRemarks.textContent = formatCurrency(totalBalance);
+    elRemainingBalance.textContent = formatCurrency(remainingBalance);
+    elPaymentRemarks.textContent = formatCurrency(remainingBalance);
     elCheckinRemarks.textContent = booking.checkInDate.format(
         "dddd, MMMM DD, YYYY",
     );
@@ -296,17 +389,19 @@ generateButton.addEventListener("click", () => {
     );
     elAdditionalRemarks.innerHTML = additionalRemarksHTML.join(" ");
 
-    elBookingInfo.textContent = `${booking.guestName}\t${
+    // get booking info to copy paste to google sheets
+    const checkIn = booking.checkInDate.format("MMMM DD YYYY");
+    const checkOut = booking.checkOutDate.format("MMMM DD YYYY");
+    const rooms = booking.rooms.map((room) => room.roomType).join(", ");
+
+    booking.bookingInfo = `${booking.guestName}\t${
         booking.bookingId
-    }\t${booking.checkInDate.format(
-        "MMMM DD YYYY",
-    )}\t${booking.checkOutDate.format("MMMM DD YYYY")}\t${booking.numRooms}x ${
-        booking.roomType
-    }\t${booking.numAdults + booking.extraAdult}\t${
+    }\t${checkIn}\t${checkOut}\t${rooms}\t${booking.numAdults + booking.extraAdult}\t${
         booking.numChildren + booking.extraChild
-    }\t\t${booking.totalBalance}\t${booking.totalRoomCharge}\t0\t${
-        booking.totalRoomCharge
+    }\t\t${booking.remainingBalance}\t${booking.totalRoomCharge}\t${booking.totalRoomCharge - booking.totalBalance}\t${
+        booking.totalBalance
     }`;
+    elBookingInfo.textContent = booking.bookingInfo;
 
     // change document title
     document.title = `[Jaelle Residences] ${booking.bookingId} - ${booking.guestName}`;
