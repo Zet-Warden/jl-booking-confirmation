@@ -275,32 +275,37 @@
                 </div>
             </div>
         </div>
-
-        <div class="m-5 flex justify-center print:hidden">
-            <button
-                id="generate_btn"
-                class="ml-3 border bg-white px-5 py-3 text-xl font-bold uppercase hover:brightness-90"
-            >
-                Generate
-            </button>
-            <button
-                id="copy_btn"
-                class="ml-3 border bg-white px-5 py-3 text-xl font-bold uppercase hover:brightness-90"
-            >
-                Copy Receipt
-            </button>
-            <button
-                id="copy_info_btn"
-                class="ml-3 border bg-white px-5 py-3 text-xl font-bold uppercase hover:brightness-90"
-            >
-                Copy Info
-            </button>
-            <button
-                id="print_btn"
-                class="ml-3 border bg-white px-5 py-3 text-xl font-bold uppercase hover:brightness-90"
-            >
-                Print
-            </button>
+        <div
+            class="m-5 flex flex-col justify-center gap-3 md:w-full md:flex-row print:hidden"
+        >
+            <div class="flex justify-center">
+                <button
+                    id="generate_btn"
+                    class="border bg-white px-5 py-3 text-lg font-bold uppercase hover:brightness-90 md:text-xl"
+                >
+                    Generate
+                </button>
+            </div>
+            <div class="flex gap-3">
+                <button
+                    id="copy_btn"
+                    class="border bg-white px-5 py-3 text-lg font-bold uppercase hover:brightness-90 md:text-xl"
+                >
+                    Copy Receipt
+                </button>
+                <button
+                    id="copy_info_btn"
+                    class="border bg-white px-5 py-3 text-lg font-bold uppercase hover:brightness-90 md:text-xl"
+                >
+                    Copy Info
+                </button>
+                <button
+                    id="print_btn"
+                    class="border bg-white px-5 py-3 text-lg font-bold uppercase hover:brightness-90 md:text-xl"
+                >
+                    Print
+                </button>
+            </div>
         </div>
 
         <!-- Copy Paste to Sheets -->
@@ -313,7 +318,7 @@
 
         <!-- Booking Confirmation -->
         <div
-            class="-mt-40 flex scale-[0.7] justify-center md:mt-auto md:scale-100 print:mt-auto print:scale-100"
+            class="-mt-40 flex scale-[0.6] justify-center md:mt-auto md:scale-100 print:mt-auto print:scale-100"
         >
             <div
                 id="reservation_receipt"
