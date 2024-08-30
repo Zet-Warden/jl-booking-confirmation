@@ -94,7 +94,7 @@ function formatOccupancy(numAdults, numChildren) {
 
 function copyNodeImageToClipboard(node) {
     htmlToImage
-        .toBlob(node)
+        .toBlob(node, { skipAutoScale: true }) // prevent scaling long booking confirmation to a smaller image
         .then(function (blob) {
             const item = new ClipboardItem({ "image/png": blob });
             navigator.clipboard.write([item]);
