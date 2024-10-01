@@ -61,6 +61,7 @@ function generateBookingId(modeOfPayment) {
 function getRoomPrice(roomType) {
     switch (roomType) {
         case "Studio":
+        case "Studio w/ Balcony":
             return STUDIO_PRICE;
         case "Deluxe":
             return DELUXE_PRICE;
@@ -94,7 +95,7 @@ function formatOccupancy(numAdults, numChildren) {
 
 function copyNodeImageToClipboard(node) {
     htmlToImage
-        .toBlob(node, { skipAutoScale: true }) // prevent scaling long booking confirmation to a smaller image
+        .toBlob(node) // prevent scaling long booking confirmation to a smaller image
         .then(function (blob) {
             const item = new ClipboardItem({ "image/png": blob });
             navigator.clipboard.write([item]);
@@ -103,6 +104,19 @@ function copyNodeImageToClipboard(node) {
         .catch(function (error) {
             console.error("oops, something went wrong!", error);
         });
+
+    // htmlToImage.toCanvas(node).then((canvas) => {
+    //     console.log(canvas.width, canvas.height);
+    //     canvas.toBlob((blob) => {
+    //         const item = new ClipboardItem({ "image/png": blob });
+    //         navigator.clipboard.write([item]);
+    //         alert("Successfully copied to clipboard!");
+    //     });
+    // });
+
+    // htmlToImage.toCanvas(node).then(function (canvas) {
+    //     document.body.appendChild(canvas);
+    // });
 }
 
 function copyBookingInfoToClipboard() {
