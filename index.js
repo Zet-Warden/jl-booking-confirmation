@@ -66,6 +66,7 @@ function getRoomPrice(roomType) {
         case "Deluxe":
             return DELUXE_PRICE;
         case "Twin":
+        case "S-Twin":
             return TWIN_PRICE;
         case "Two Bedroom":
             return TWO_BEDROOM_PRICE;
