@@ -164,6 +164,7 @@ const ipDiscountDescription = document.querySelector(
 const ipDiscount = document.querySelector("#ip_discount");
 const ipDownpayment = document.querySelector("#ip_downpayment");
 const ipBookingId = document.querySelector("#ip_booking_id");
+const cbCustomBookingId = document.querySelector("#cb_custom_booking_id");
 
 // DOM Nodes that represent each data to replace
 const elReservationReceipt = document.querySelector("#reservation_receipt");
@@ -311,7 +312,10 @@ generateButton.addEventListener("click", () => {
     booking.discountDescription = ipDiscountDescription.value;
     booking.discount = +ipDiscount.value;
 
-    booking.bookingId = generateBookingId(booking.modeOfPayment);
+    const shouldUseCustomBookingId = cbCustomBookingId.checked;
+    booking.bookingId = shouldUseCustomBookingId
+        ? ipBookingId.value
+        : generateBookingId(booking.modeOfPayment);
     ipBookingId.value = booking.bookingId;
 
     // take into account "nights" for day room

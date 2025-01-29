@@ -60,7 +60,7 @@
                         ></textarea>
                     </div>
                 </div>
-                <!-- Middle Section -->
+                <!-- Second Section -->
                 <div
                     class="flex h-full flex-col justify-start gap-2 border-black pr-2 md:border-r"
                 >
@@ -192,6 +192,7 @@
                         ></div>
                     </div>
                 </div>
+                <!-- Third Section -->
                 <div
                     class="flex w-full flex-col justify-start gap-2 md:h-full md:w-auto"
                 >
@@ -276,13 +277,23 @@
                             />
                         </div>
                     </div>
-                    <div class="flex">
+                    <div class="relative flex">
                         <p class="w-40">Booking Id</p>
                         <input
                             id="ip_booking_id"
                             type="text"
                             class="border px-3"
                         />
+                        <label
+                            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[calc(100%+4px)]"
+                        >
+                            <input
+                                type="checkbox"
+                                name="custom_booking_id"
+                                id="cb_custom_booking_id"
+                            />
+                            Custom Booking ID
+                        </label>
                     </div>
                 </div>
             </div>
