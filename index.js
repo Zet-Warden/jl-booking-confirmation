@@ -151,6 +151,7 @@ const ipExtraAdult = document.querySelector("#ip_extra_adult");
 const ipExtraChild = document.querySelector("#ip_extra_child");
 const ipExtraBed = document.querySelector("#ip_extra_bed");
 const ipNumberofPets = document.querySelector("#ip_num_pets");
+const taAdminNotes = document.querySelector("#ta_admin_notes");
 const taRemarks = document.querySelector("#ta_remarks");
 
 const ipModeOfPayment = document.querySelector("#ip_mode_of_payment");
@@ -408,12 +409,17 @@ generateButton.addEventListener("click", () => {
     const checkIn = booking.checkInDate.format("MMMM DD YYYY");
     const checkOut = booking.checkOutDate.format("MMMM DD YYYY");
     const rooms = booking.rooms.map((room) => room.roomType).join(", ");
+    const adminNotes = taAdminNotes.value;
 
+    /**
+     * NOTE:
+     * add quotation in between ${adminNotes} to properly copy multi-line texts in Google Sheets cell
+     */
     booking.bookingInfo = `${booking.guestName}\t${
         booking.bookingId
     }\t${checkIn}\t${checkOut}\t${rooms}\t${booking.numAdults + booking.extraAdult}\t${
         booking.numChildren + booking.extraChild
-    }\t\t${booking.remainingBalance}\t${booking.totalRoomCharge}\t${booking.totalRoomCharge - booking.totalBalance}\t${
+    }\t"${adminNotes}"\t${booking.remainingBalance}\t${booking.totalRoomCharge}\t${booking.totalRoomCharge - booking.totalBalance}\t${
         booking.totalBalance
     }`;
     elBookingInfo.textContent = booking.bookingInfo;
