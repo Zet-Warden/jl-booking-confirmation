@@ -412,7 +412,16 @@ generateButton.addEventListener("click", () => {
     // get booking info to copy paste to google sheets
     const checkIn = booking.checkInDate.format("MMMM DD YYYY");
     const checkOut = booking.checkOutDate.format("MMMM DD YYYY");
-    const rooms = booking.rooms.map((room) => room.roomType).join(", ");
+    const roomCount = booking.rooms.reduce((tracker, room) => {
+        tracker[room.roomType] =
+            tracker[room.roomType] == undefined
+                ? 1
+                : tracker[room.roomType] + 1;
+        return tracker;
+    }, {});
+    const rooms = Object.keys(roomCount)
+        .map((roomType) => `${roomCount[roomType]}x ${roomType}`)
+        .join(", ");
     const adminNotes = taAdminNotes.value;
 
     /**
