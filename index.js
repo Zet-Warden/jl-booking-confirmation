@@ -105,19 +105,6 @@ function copyNodeImageToClipboard(node) {
         .catch(function (error) {
             console.error("oops, something went wrong!", error);
         });
-
-    // htmlToImage.toCanvas(node).then((canvas) => {
-    //     console.log(canvas.width, canvas.height);
-    //     canvas.toBlob((blob) => {
-    //         const item = new ClipboardItem({ "image/png": blob });
-    //         navigator.clipboard.write([item]);
-    //         alert("Successfully copied to clipboard!");
-    //     });
-    // });
-
-    // htmlToImage.toCanvas(node).then(function (canvas) {
-    //     document.body.appendChild(canvas);
-    // });
 }
 
 function copyBookingInfoToClipboard() {
@@ -279,7 +266,6 @@ addRoomButton.addEventListener("click", () => {
     // reset input fields
     ipNumberOfAdults.value = 1;
     ipNumberOfChildren.value = 0;
-    ipNumberofPets.value = 0;
 });
 
 // generate booking confirmation receipt
@@ -299,12 +285,12 @@ generateButton.addEventListener("click", () => {
     booking.checkOutDate = dayjs(ipCheckOut.value);
 
     booking.roomType = ipRoomType.value;
-    booking.roomPrice = +ipRoomPrice.value;
-    booking.numRooms = +ipNumRooms.value;
-    booking.extraAdult = +ipExtraAdult.value;
-    booking.extraChild = +ipExtraChild.value;
-    booking.extraBed = +ipExtraBed.value;
-    booking.numPets = +ipNumberofPets.value;
+    booking.roomPrice = +ipRoomPrice.valueAsNumber;
+    booking.numRooms = +ipNumRooms.valueAsNumber;
+    booking.extraAdult = +ipExtraAdult.valueAsNumber;
+    booking.extraChild = +ipExtraChild.valueAsNumber;
+    booking.extraBed = +ipExtraBed.valueAsNumber;
+    booking.numPets = +ipNumberofPets.valueAsNumber;
 
     booking.modeOfPayment = ipModeOfPayment.value;
     booking.paymentReferenceNumber = ipPaymentReferenceNumber.value;
