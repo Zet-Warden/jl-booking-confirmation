@@ -1,18 +1,20 @@
 {
-  "name": "reservation_receipt",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "tw": "npx tailwindcss/cli -i ./input.css -o ./output.css --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.6",
-    "tailwindcss": "^3.4.1"
-  }
+    "name": "reservation_receipt",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "tw": "npx tailwindcss -i ./input.css -o ./output.css --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "prettier": "^3.3.3",
+        "prettier-plugin-tailwindcss": "^0.6.6"
+    },
+    "dependencies": {
+        "tailwindcss": "^3.4.1"
+    }
 }

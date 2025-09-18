@@ -11,13 +11,13 @@
         <link rel="stylesheet" media="print" href="print.css" />
     </head>
     <body class="m-5 flex flex-col items-center">
-        <div class="flex justify-center print:hidden">
+        <div class="flex w-full justify-center print:hidden">
             <div
-                class="flex w-full flex-col items-start gap-2 md:w-auto md:flex-row md:items-start"
+                class="flex w-full grow flex-col items-center justify-center gap-2 md:w-auto lg:flex-row"
             >
                 <!-- First Section -->
                 <div
-                    class="flex h-full flex-col gap-2 border-black pr-2 md:border-r"
+                    class="flex h-full w-[400px] flex-col gap-2 border-black pr-2 lg:w-auto lg:border-r"
                 >
                     <div class="flex items-center">
                         <span class="mr-1 inline-block w-32">Guest Name</span>
@@ -62,9 +62,9 @@
                 </div>
                 <!-- Second Section -->
                 <div
-                    class="flex h-full flex-col justify-start gap-2 border-black pr-2 md:border-r"
+                    class="flex h-full w-[400px] flex-col justify-start gap-2 border-black pr-2 lg:w-auto lg:border-r"
                 >
-                    <div class="flex flex-wrap gap-1 md:gap-5">
+                    <div class="flex flex-wrap gap-1 lg:gap-5">
                         <div class="flex items-center">
                             <p class="w-32">Room Type</p>
                             <select
@@ -96,7 +96,7 @@
                             />
                         </div>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2 md:gap-5">
+                    <div class="flex flex-wrap items-center gap-2 lg:gap-5">
                         <div class="flex">
                             <p class="w-32"># of Rooms:</p>
                             <input
@@ -108,8 +108,8 @@
                             />
                         </div>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2 md:gap-5">
-                        <div class="flex pr-5 md:pr-12">
+                    <div class="flex flex-wrap items-center gap-2 lg:gap-5">
+                        <div class="flex pr-5 lg:pr-12">
                             <p class="w-32">Num. adults</p>
                             <input
                                 id="ip_num_adults"
@@ -130,8 +130,8 @@
                             />
                         </div>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2 md:gap-5">
-                        <div class="flex pr-5 md:pr-12">
+                    <div class="flex flex-wrap items-center gap-2 lg:gap-5">
+                        <div class="flex pr-5 lg:pr-12">
                             <p class="w-32">Extra Person Nbr:</p>
                             <input
                                 id="ip_extra_adult"
@@ -152,8 +152,8 @@
                             />
                         </div>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2 md:gap-5">
-                        <div class="flex pr-5 md:pr-12">
+                    <div class="flex flex-wrap items-center gap-2 lg:gap-5">
+                        <div class="flex pr-5 lg:pr-12">
                             <p class="w-32"># of Pets</p>
                             <input
                                 id="ip_num_pets"
@@ -184,7 +184,7 @@
                     </div>
 
                     <div
-                        class="flex min-h-20 w-full justify-center border pl-4 md:w-[500px] md:pl-3"
+                        class="flex min-h-20 w-full justify-center border pl-4 lg:w-[500px] lg:pl-3"
                     >
                         <div
                             id="rooms_info"
@@ -194,13 +194,13 @@
                 </div>
                 <!-- Third Section -->
                 <div
-                    class="flex w-full flex-col justify-start gap-2 md:h-full md:w-auto"
+                    class="flex w-[400px] flex-col justify-start gap-2 md:h-full lg:w-auto"
                 >
                     <div class="flex">
                         <p class="w-40">Mode of Payment</p>
                         <select
                             id="ip_mode_of_payment"
-                            class="border bg-white px-2 py-1 md:w-[calc(100%-10rem)]"
+                            class="w-[180px] border bg-white px-2 py-1"
                         >
                             <option value="GCash">GCash</option>
                             <option value="Bank Transfer">Bank Transfer</option>
@@ -215,7 +215,7 @@
                         <input
                             id="ip_payment_reference"
                             type="text"
-                            class="border px-3"
+                            class="w-[180px] border px-3"
                         />
                     </div>
                     <div class="flex">
@@ -231,7 +231,7 @@
                         <div class="flex flex-col gap-1">
                             <select
                                 id="ip_discount_description"
-                                class="w-full border bg-white px-2 py-1 [&:invalid]:text-gray-400"
+                                class="w-[180] border bg-white px-2 py-1 [&:invalid]:text-gray-400"
                                 required
                             >
                                 <option
@@ -272,28 +272,28 @@
                             <input
                                 id="ip_discount"
                                 type="text"
-                                class="border px-3"
+                                class="w-[180px] border px-3"
                                 placeholder="Discount Amount"
                             />
                         </div>
                     </div>
                     <div class="relative flex">
                         <p class="w-40">Booking Id</p>
-                        <input
-                            id="ip_booking_id"
-                            type="text"
-                            class="border px-3"
-                        />
-                        <label
-                            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[calc(100%+4px)]"
-                        >
+                        <div class="flex flex-col">
                             <input
-                                type="checkbox"
-                                name="custom_booking_id"
-                                id="cb_custom_booking_id"
+                                id="ip_booking_id"
+                                type="text"
+                                class="w-[180px] border px-3"
                             />
-                            Custom Booking ID
-                        </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="custom_booking_id"
+                                    id="cb_custom_booking_id"
+                                />
+                                Custom Booking ID
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -341,7 +341,7 @@
 
         <!-- Booking Confirmation -->
         <div
-            class="-mt-48 flex scale-[0.6] justify-center md:mt-auto md:scale-100 print:mt-auto print:scale-100"
+            class="-mt-48 flex scale-[1] justify-center md:mt-auto md:scale-100 print:mt-auto print:scale-100"
         >
             <div
                 id="reservation_receipt"
