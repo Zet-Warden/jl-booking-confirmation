@@ -192,6 +192,10 @@ const elCheckinRemarks = document.querySelector("#check-in_remarks");
 
 const elBookingInfo = document.querySelector("#booking_info");
 
+const elBookingConfirmationTitle = document.querySelector(
+    "#booking_confirmation_title",
+);
+
 // default values
 window.onload = () => {
     ipCheckIn.value = dayjs().format("YYYY-MM-DD");
@@ -310,6 +314,11 @@ generateButton.addEventListener("click", () => {
         booking.checkOutDate.diff(booking.checkInDate, "day"),
         1,
     );
+
+    // if using custom booking ID then the booking confirmation is an amendment
+    elBookingConfirmationTitle.textContent = cbCustomBookingId
+        ? "Amended Booking Confirmation"
+        : "Booking Confirmation";
 
     // display booking values in HTML
     elBookingId.textContent = booking.bookingId;
