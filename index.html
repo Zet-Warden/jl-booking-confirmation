@@ -11,13 +11,13 @@
         <link rel="stylesheet" media="print" href="print.css" />
     </head>
     <body class="m-5 flex flex-col items-center">
-        <div class="flex w-full justify-center print:hidden">
+        <div class="flex w-full justify-center px-12 print:hidden">
             <div
                 class="flex w-full grow flex-col items-center justify-center gap-2 md:w-auto lg:flex-row"
             >
                 <!-- First Section -->
                 <div
-                    class="flex h-full w-[400px] flex-col gap-2 border-black pr-2 lg:w-auto lg:border-r"
+                    class="flex h-full w-[min(100%,400px)] flex-col gap-2 border-black pr-2 lg:w-auto lg:border-r"
                 >
                     <div class="flex items-center">
                         <span class="mr-1 inline-block w-32">Guest Name</span>
@@ -62,7 +62,7 @@
                 </div>
                 <!-- Second Section -->
                 <div
-                    class="flex h-full w-[400px] flex-col justify-start gap-2 border-black pr-2 lg:w-auto lg:border-r"
+                    class="flex h-full w-[min(100%,400px)] flex-col justify-start gap-2 border-black pr-2 lg:w-auto lg:border-r"
                 >
                     <div class="flex flex-wrap gap-1 lg:gap-5">
                         <div class="flex items-center">
@@ -194,7 +194,7 @@
                 </div>
                 <!-- Third Section -->
                 <div
-                    class="flex w-[400px] flex-col justify-start gap-2 md:h-full lg:w-auto"
+                    class="flex w-[min(100%,400px)] flex-col justify-start gap-2 md:h-full lg:w-auto"
                 >
                     <div class="flex">
                         <p class="w-40">Mode of Payment</p>
@@ -341,7 +341,7 @@
 
         <!-- Booking Confirmation -->
         <div
-            class="-mt-48 flex scale-[1] justify-center md:mt-auto md:scale-100 print:mt-auto print:scale-100"
+            class="-mt-48 flex scale-[0.6] justify-center md:mt-auto md:scale-100 print:mt-auto print:scale-100"
         >
             <div
                 id="reservation_receipt"
