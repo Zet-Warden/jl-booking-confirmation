@@ -316,7 +316,7 @@ generateButton.addEventListener("click", () => {
     );
 
     // if using custom booking ID then the booking confirmation is an amendment
-    elBookingConfirmationTitle.textContent = cbCustomBookingId
+    elBookingConfirmationTitle.textContent = cbCustomBookingId.checked
         ? "Amended Booking Confirmation"
         : "Booking Confirmation";
 
