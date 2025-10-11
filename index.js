@@ -11,6 +11,7 @@ const TRIPLE_PRICE = 3000;
 const FAMILY_PRICE = 4000;
 const CONNECTING_PRICE = 4500;
 const SUITE_PRICE = 3500;
+const ADJOINING_PRICE = 6000;
 
 const booking = {
     guestName: "",
@@ -78,6 +79,8 @@ function getRoomPrice(roomType) {
             return CONNECTING_PRICE;
         case "Suite":
             return SUITE_PRICE;
+        case "Adjoining":
+            return ADJOINING_PRICE;
     }
 }
 
