@@ -424,7 +424,7 @@ generateButton.addEventListener("click", () => {
 
     /**
      * NOTE:
-     * add quotation in between ${adminNotes} to properly copy multi-line texts in Google Sheets cell
+     * Quotation is added in between ${adminNotes} to properly copy multi-line texts in Google Sheets cell
      */
     booking.bookingInfo = `${booking.guestName}\t${
         booking.bookingId
@@ -453,4 +453,13 @@ copyInfoButton.addEventListener("click", () => {
 const printButton = document.querySelector("#print_btn");
 printButton.addEventListener("click", () => {
     window.print();
+});
+
+const cbDesignMode = document.querySelector("#cb_design_mode");
+cbDesignMode.addEventListener("change", () => {
+    if (cbDesignMode.checked) {
+        document.designMode = "on";
+    } else {
+        document.designMode = "off";
+    }
 });
