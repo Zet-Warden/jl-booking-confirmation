@@ -7,11 +7,11 @@ const STUDIO_PRICE = 2000;
 const DELUXE_PRICE = 2400;
 const TWIN_PRICE = 3000;
 const TWO_BEDROOM_PRICE = 3000;
-const TRIPLE_PRICE = 3000;
+const TRIPLE_PRICE = 3200;
 const FAMILY_PRICE = 4000;
 const CONNECTING_PRICE = 4500;
 const SUITE_PRICE = 3500;
-const ADJOINING_PRICE = 6000;
+const ADJOINING_PRICE = 6500;
 
 const booking = {
     guestName: "",
