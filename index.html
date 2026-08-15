@@ -88,6 +88,14 @@
                                 <option value="Adjoining">Adjoining</option>
                             </select>
                         </div>
+                        <!-- <div class="flex items-center">
+                            <p class="">bf:</p>
+                            <input
+                                id="ip_with_bf"
+                                type="checkbox"
+                                class="border"
+                            />
+                        </div> -->
                         <div class="flex items-center">
                             <p class="w-32">Amount</p>
                             <input
@@ -98,15 +106,33 @@
                         </div>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 lg:gap-5">
+                        <div class="flex items-center">
+                            <p class="w-32">Breakfast:</p>
+                            <div class="relative">
+                                <input
+                                    id="ip_with_bf"
+                                    type="checkbox"
+                                    class="absolute left-0 top-1/2 h-4 w-6 -translate-x-[calc(50%+12px)] -translate-y-1/2 border"
+                                />
+                                <input
+                                    id="ip_bf_price"
+                                    type="text"
+                                    inputmode="numeric"
+                                    class="w-20 border pr-2 text-right"
+                                />
+                            </div>
+                        </div>
+
                         <div class="flex">
-                            <p class="w-32"># of Rooms:</p>
-                            <input
-                                id="ip_num_rooms"
-                                type="number"
-                                class="w-20 border pl-10"
-                                min="0"
-                                value="1"
-                            />
+                            <div class="hidden">
+                                <p class="w-32"># of Rooms:</p>
+                                <input
+                                    id="ip_num_rooms"
+                                    type="number"
+                                    class="w-20 border pl-10"
+                                    value="1"
+                                />
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 lg:gap-5">

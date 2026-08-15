@@ -649,6 +649,10 @@ video {
   inset: -0.25rem;
 }
 
+.-top-1\/2 {
+  top: -50%;
+}
+
 .end-1 {
   inset-inline-end: 0.25rem;
 }
@@ -663,6 +667,22 @@ video {
 
 .top-0 {
   top: 0px;
+}
+
+.top-1\/2 {
+  top: 50%;
+}
+
+.-left-full {
+  left: -100%;
+}
+
+.-left-1\/2 {
+  left: -50%;
+}
+
+.left-0 {
+  left: 0px;
 }
 
 .isolate {
@@ -877,6 +897,10 @@ video {
   height: 7rem;
 }
 
+.h-4 {
+  height: 1rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -907,6 +931,10 @@ video {
 
 .w-40 {
   width: 10rem;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .w-60 {
@@ -943,10 +971,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[min\(100\%\2c 450px\)\] {
-  width: min(100%,450px);
 }
 
 .flex-1 {
@@ -991,6 +1015,31 @@ video {
 
 .border-separate {
   border-collapse: separate;
+}
+
+.translate-x-1\/2 {
+  --tw-translate-x: 50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-1\/2 {
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.translate-x-\[calc\(50\%\+12px\)\] {
+  --tw-translate-x: calc(50% + 12px);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-x-\[calc\(50\%\+12px\)\] {
+  --tw-translate-x: calc(calc(50% + 12px) * -1);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .scale-\[0\.6\] {

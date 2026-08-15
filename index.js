@@ -13,6 +13,8 @@ const CONNECTING_PRICE = 4500;
 const SUITE_PRICE = 3500;
 const ADJOINING_PRICE = 6500;
 
+let BREAKFAST_PRICE = 200; //per pax
+
 const booking = {
     guestName: "",
     numAdults: 0,
@@ -137,6 +139,8 @@ const ipCheckOut = document.querySelector("#ip_check-out");
 const ipRoomType = document.querySelector("#ip_room_type");
 const ipRoomPrice = document.querySelector("#ip_room_price");
 const ipNumRooms = document.querySelector("#ip_num_rooms");
+const ipWithBreakfast = document.querySelector("#ip_with_bf");
+const ipBreakfastPrice = document.querySelector("#ip_bf_price");
 const ipExtraAdult = document.querySelector("#ip_extra_adult");
 const ipExtraChild = document.querySelector("#ip_extra_child");
 const ipExtraBed = document.querySelector("#ip_extra_bed");
@@ -208,6 +212,8 @@ window.onload = () => {
     ipCheckOut.min = dayjs().format("YYYY-MM-DD");
 
     ipRoomPrice.value = getRoomPrice(ipRoomType.value);
+
+    ipBreakfastPrice.value = BREAKFAST_PRICE;
 };
 
 ipRoomType.onchange = () => {
@@ -218,11 +224,17 @@ ipRoomType.onchange = () => {
 const addRoomButton = document.querySelector("#add_room_btn");
 addRoomButton.addEventListener("click", () => {
     const roomType = ipRoomType.value;
-    const roomPrice = +ipRoomPrice.value;
-    const numRooms = +ipNumRooms.value;
+    const numRooms = 1; //+ipNumRooms.valueAsNumber;
 
     const numAdults = +ipNumberOfAdults.value;
     const numChildren = +ipNumberOfChildren.value;
+
+    const withBreakfast = Boolean(ipWithBreakfast.checked);
+    const breakfastPrice = +ipBreakfastPrice.value;
+
+    const roomPrice =
+        +ipRoomPrice.value +
+        breakfastPrice * numAdults * Boolean(withBreakfast);
 
     const roomId = String(Math.floor(Math.random() * 10 ** 5)).padStart(5, 0);
 
@@ -233,6 +245,8 @@ addRoomButton.addEventListener("click", () => {
         numRooms,
         numAdults,
         numChildren,
+        withBreakfast,
+        breakfastPrice,
     });
 
     const roomInfoContainer = document.querySelector("#rooms_info");
@@ -242,7 +256,7 @@ addRoomButton.addEventListener("click", () => {
 
     roomInfo.appendChild(
         document.createTextNode(
-            `${numRooms == 1 ? "" : numRooms + " "}${roomType}`,
+            `${numRooms == 1 ? "" : numRooms + " "}${roomType} ${withBreakfast ? "w/ Breakfast" : ""}`,
         ),
     );
     roomInfo.appendChild(document.createElement("br"));
@@ -263,7 +277,8 @@ addRoomButton.addEventListener("click", () => {
     });
 
     roomHTML.setAttribute("id", roomId);
-    roomHTML.setAttribute("class", "border px-2 py-3 w-32 relative");
+    roomHTML.setAttribute("class", "border px-2 py-3 relative");
+    roomHTML.setAttribute("style", "padding-right: 24px");
 
     roomHTML.appendChild(roomInfo);
     roomHTML.appendChild(closeButton);
@@ -401,11 +416,21 @@ generateButton.addEventListener("click", () => {
         "dddd, MMMM DD, YYYY",
     );
 
+    const breakfastRemarks = booking.rooms
+        .filter((room) => room.withBreakfast)
+        .map(
+            (room) =>
+                `<p>${room.roomType} (${room.numAdults} Adult) includes breakfast for ${room.numAdults} pax.</p>`,
+        );
+
     const additionalRemarks = taRemarks.value.split("\n");
     const additionalRemarksHTML = additionalRemarks.map(
         (remark) => `<p>${remark.trim()}</p>`,
     );
-    elAdditionalRemarks.innerHTML = additionalRemarksHTML.join(" ");
+    elAdditionalRemarks.innerHTML = [
+        ...breakfastRemarks,
+        ...additionalRemarksHTML,
+    ].join(" ");
 
     // get booking info to copy paste to google sheets
     const checkIn = booking.checkInDate.format("MMMM DD YYYY");
@@ -420,7 +445,14 @@ generateButton.addEventListener("click", () => {
     const rooms = Object.keys(roomCount)
         .map((roomType) => `${roomCount[roomType]}x ${roomType}`)
         .join(", ");
-    const adminNotes = taAdminNotes.value;
+
+    const withBreakfastAdminNote = booking.rooms
+        .filter((room) => room.withBreakfast)
+        .map(
+            (room) =>
+                `${room.roomType} (${room.numAdults} Adult) - with bf ${room.numAdults} pax (P${room.breakfastPrice}/pax)`,
+        );
+    const adminNotes = `${withBreakfastAdminNote}\n${taAdminNotes.value}`;
 
     /**
      * NOTE:
