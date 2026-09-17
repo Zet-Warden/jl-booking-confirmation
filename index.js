@@ -450,9 +450,10 @@ generateButton.addEventListener("click", () => {
         .filter((room) => room.withBreakfast)
         .map(
             (room) =>
-                `${room.roomType} (${room.numAdults} Adult) - with bf ${room.numAdults} pax (P${room.breakfastPrice}/pax)`,
-        );
-    const adminNotes = `${withBreakfastAdminNote}\n${taAdminNotes.value}`;
+                `> ${room.roomType} - with bf ${room.numAdults} pax (P${room.breakfastPrice}/pax)`,
+        )
+        .join("\n");
+    const adminNotes = `${withBreakfastAdminNote}${taAdminNotes.value}`;
 
     /**
      * NOTE:
