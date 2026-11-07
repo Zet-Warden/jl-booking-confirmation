@@ -13,7 +13,7 @@ const CONNECTING_PRICE = 4500;
 const SUITE_PRICE = 3500;
 const ADJOINING_PRICE = 6500;
 
-let BREAKFAST_PRICE = 200; //per pax
+let BREAKFAST_PRICE = 250; //per pax
 
 const booking = {
     guestName: "",
